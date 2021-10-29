@@ -11,6 +11,6 @@ router.post('/api/signin', signInValidation, login);
 router.use(auth, userRouter);
 router.use(auth, movieRouter);
 
-router.all('*', () => { throw new NotFoundError('Запрашиваемый адрес не найден'); });
+// router.all('*', () => { throw new NotFoundError('Запрашиваемый адрес не найден'); });
 
 module.exports = router;
