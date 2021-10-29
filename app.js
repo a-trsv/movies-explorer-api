@@ -26,12 +26,12 @@ const app = express();
 // app.use(cors({
 //   origin: ALLOWED_CORS_LINKS,
 // }));
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, HEAD, PUTP, PATCH, POST, DELETE, OPTIONS');
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Headers', '*');
+//   res.header('Access-Control-Allow-Methods', 'GET, HEAD, PUTP, PATCH, POST, DELETE, OPTIONS');
+//   next();
+// });
 
 app.use(express.json());
 app.use(helmet());
