@@ -4,14 +4,14 @@ const express = require('express');
 const { PORT = 3000 } = process.env;
 const helmet = require('helmet');
 const mongoose = require('mongoose');
-const cors = require('cors');
+// const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const expressRateLimiter = require('./middlewares/expressRateLimiter');
 const errorHandler = require('./middlewares/errorHandler');
 const router = require('./routes/index');
-const { MONGO_DATEBASE_LINK, ALLOWED_CORS_LINKS } = require('./utils/constants');
+const { MONGO_DATEBASE_LINK } = require('./utils/constants');
 // const usersRouter = require('./routes/users');
 // const moviesRouter = require('./routes/movies');
 
@@ -23,9 +23,9 @@ mongoose.connect(MONGO_DATEBASE_LINK, {
 });
 const app = express();
 
-app.use(cors({
-  origin: ALLOWED_CORS_LINKS,
-}));
+// app.use(cors({
+//   origin: ALLOWED_CORS_LINKS,
+// }));
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', '*');
