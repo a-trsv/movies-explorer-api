@@ -6,8 +6,8 @@ const NotFoundError = require('../middlewares/errors/not-found-error');
 const auth = require('../middlewares/auth');
 const { signInValidation, signUpValidation } = require('../middlewares/validation');
 
-router.post('/api/signup', signUpValidation, createUser);
-router.post('/api/signin', signInValidation, login);
+router.post('/signup', signUpValidation, createUser);
+router.post('/signin', signInValidation, login);
 router.use(auth, userRouter);
 router.use(auth, movieRouter);
 

@@ -39,7 +39,7 @@ const movieSchema = new mongoose.Schema({
       validator(url) {
         validator.isURL(url, { require_protocol: true });
       },
-      message: 'Некорректная ссылка на картинку!',
+      message: 'Некорректная ссылка на трейлер!',
     },
   },
   thumbnail: {

@@ -7,12 +7,11 @@ const {
 } = require('../controllers/movies');
 
 // Валидация
-
 const { newMovieValidation, movieIdValidation } = require('../middlewares/validation');
 
 // Роуты
-movieRouter.get('/api/movies', getMovies);
-movieRouter.post('/api/movies', newMovieValidation, postMovie);
-movieRouter.delete('/api/movies/:movieId', movieIdValidation, deleteMovie);
+movieRouter.get('/movies', getMovies);
+movieRouter.post('/movies', newMovieValidation, postMovie);
+movieRouter.delete('/movies/:movieId', movieIdValidation, deleteMovie);
 
 module.exports = movieRouter;

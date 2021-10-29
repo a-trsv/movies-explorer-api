@@ -54,9 +54,9 @@ const newMovieValidation = celebrate({
 });
 
 module.exports = {
-  signInValidation, // +
-  signUpValidation, // +
-  userUpdateValidation, // +
-  newMovieValidation, // +
-  movieIdValidation, // +
+  signInValidation,
+  signUpValidation,
+  userUpdateValidation,
+  newMovieValidation,
+  movieIdValidation,
 };

@@ -13,9 +13,7 @@ const {
 } = require('../middlewares/validation');
 
 // Роуты
-// userRouter.get('/users', getUsers);
-userRouter.get('/api//users/me', getCurrentUser);
-// userRouter.get('/users/:userId', userIdValidation, getUserById);
-userRouter.patch('/api/users/me', userUpdateValidation, updateUser);
+userRouter.get('/users/me', getCurrentUser);
+userRouter.patch('/users/me', userUpdateValidation, updateUser);
 
 module.exports = userRouter;

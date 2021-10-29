@@ -12,7 +12,7 @@ const AccessError = require('../middlewares/errors/access-error');
 const getMovies = (req, res, next) => {
   Movie.find({})
     .then((movies) => {
-      res.status(200).send(movies);
+      res.send(movies);
     })
     .catch(next);
 };
@@ -69,7 +69,7 @@ const deleteMovie = (req, res, next) => {
       } else {
         Movie.findByIdAndDelete(req.params.movieId)
           .then((movieToDelete) => {
-            res.status(200).send(movieToDelete);
+            res.send(movieToDelete);
           });
       }
     })
