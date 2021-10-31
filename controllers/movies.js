@@ -62,16 +62,13 @@ const postMovie = (req, res, next) => {
 
 const deleteMovie = (req, res, next) => {
   Movie.findById(req.params.movieId)
-    .orFail(new NotFoundError('Movie не найден с таким id!'))
+    .orFail(new NotFoundError('Фильм не найден с таким id!'))
     .then((movie) => {
-      if (movie.owner.toString() !== req.user._id) {
-        next(new AccessError('У вас нет прав на удаление данного movie'));
-      } else {
-        Movie.findByIdAndDelete(req.params.movieId)
-          .then((movieToDelete) => {
-            res.send(movieToDelete);
-          });
+      if (movie.owner.toString() === req.user._id) {
+        return movie.remove()
+          .then(() => res.send({ message: 'Фильм успешно удален!' }));
       }
+      throw new AccessError('У вас нет прав на удаление данного фильма!');
     })
     .catch((error) => {
       if (error.name === 'CastError') {

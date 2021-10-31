@@ -17,20 +17,16 @@ const UnauthorizedError = require('../middlewares/errors/error-unathorized');
 // 409 -> ошибка совпадени E-Mail при регистрации
 const ExistEmailError = require('../middlewares/errors/exist-error');
 
-const getCurrentUser = (req, res, next) => User.findById(req.user._id)
-  .then((user) => {
-    if (!user) {
-      throw new NotFoundError('Пользователь не найден с таким id!');
-    }
-    res.send(user);
-  })
-  .catch((error) => {
-    if (error.name === 'CastError') {
-      next(new RequestError('Введенные данные некорректны!'));
-    } else {
-      next(error);
-    }
-  });
+const getCurrentUser = (req, res, next) => {
+  User.findById(req.user._id)
+    .then((user) => {
+      if (!user) {
+        throw new NotFoundError('Пользователь не найден с таким id!');
+      }
+      res.send(user);
+    })
+    .catch(next);
+};
 
 const updateUser = (req, res, next) => {
   const { name, email } = req.body;
@@ -44,6 +40,8 @@ const updateUser = (req, res, next) => {
     .catch((error) => {
       if (error.name === 'ValidationError' || error.name === 'CastError') {
         next(new RequestError('Введенные данные некорректны!'));
+      } else if (error.code === 11000) {
+        next(new ExistEmailError('Данный E-Mail уже зарегистрирован!'));
       } else {
         next(error);
       }
@@ -67,6 +65,8 @@ const createUser = (req, res, next) => {
         next(new RequestError('Введенные данные некорректны!'));
       } else if (error.code === 11000) {
         next(new ExistEmailError('Данный E-Mail уже зарегистрирован!'));
+      } else {
+        next(error);
       }
     });
 };
@@ -83,7 +83,7 @@ const login = (req, res, next) => {
       );
       return res.send({ token });
     })
-    .catch(() => next(new UnauthorizedError('Ошибка Авторизации')));
+    .catch(() => next(new UnauthorizedError('Неправильная почта или пароль!')));
 };
 
 module.exports = {

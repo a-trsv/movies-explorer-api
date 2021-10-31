@@ -33,9 +33,9 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 app.use(helmet());
+app.use(requestLogger);
 app.use(expressRateLimiter);
 app.use(cookieParser());
-app.use(requestLogger);
 app.use('/', router);
 app.use(errorLogger);
 app.use(errors());
