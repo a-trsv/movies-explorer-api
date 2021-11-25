@@ -23,7 +23,7 @@ const getCurrentUser = (req, res, next) => {
       if (!user) {
         throw new NotFoundError('Пользователь не найден с таким id!');
       }
-      res.send(user);
+      res.send({ data: user });
     })
     .catch(next);
 };
@@ -57,6 +57,8 @@ const createUser = (req, res, next) => {
     }))
     .then((user) => {
       res.send({
+        _id: user._id,
+        name: user.name,
         email: user.email,
       });
     })

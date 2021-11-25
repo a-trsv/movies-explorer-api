@@ -39,17 +39,17 @@ const userUpdateValidation = celebrate({
 
 const newMovieValidation = celebrate({
   body: Joi.object().keys({
-    country: Joi.string().min(2).max(30).required(),
-    director: Joi.string().min(2).max(30).required(),
+    country: Joi.string().min(2).max(999).required(),
+    director: Joi.string().min(2).max(999).required(),
     duration: Joi.number().required(),
-    year: Joi.string().required().min(4).max(4),
-    description: Joi.string().required().min(1).max(250),
+    year: Joi.string().required().min(0).max(4),
+    description: Joi.string().required().min(1).max(9999),
     image: Joi.string().required().custom(isUrlValid),
     trailer: Joi.string().required().custom(isUrlValid),
     thumbnail: Joi.string().required().custom(isUrlValid),
     movieId: Joi.number().required(),
-    nameRU: Joi.string().required().min(2).max(30),
-    nameEN: Joi.string().required().min(2).max(30),
+    nameRU: Joi.string().required().min(2).max(999),
+    nameEN: Joi.string().required().min(2).max(999),
   }),
 });
 
